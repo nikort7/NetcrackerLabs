@@ -7,19 +7,12 @@ package Field;/*
 import java.util.Scanner;
 
 
-import Checker.NamePersonChecker;
 import Compare.CompareByDate;
 import Compare.CompareByID;
 import Compare.CompareByName;
-import Find.FindPersonByDate;
-import Find.FindPersonByID;
-import Find.FindPersonByName;
-import Field.Person;
-import Field.Repository;
-import Sort.BubbleSort;
-import Sort.QuickSort;
-import Sort.SelectedSort;
 import org.joda.time.LocalDate;
+import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -30,12 +23,15 @@ public class Netcracker_lab1 {
     /**
      * @param args the command line arguments
      */
+    private static final Logger LOGGER = Logger.getLogger(Netcracker_lab1.class);
+
+
     static int i = 0;
     public static void main(String[] args)  {
        //Field.Field person1  = new Field.Field();
        Person person2  = new Person();
        Person person3  = new Person();
-       Repository list_of_person = new Repository();
+       PersonRepository list_of_person = new PersonRepository();
        int choose;
        do
        {
@@ -47,6 +43,7 @@ public class Netcracker_lab1 {
                     + "4. Вывод.\n"
                     + "5. Сортировка.\n"
                     + "6. Выход\n");
+
            Scanner in = new Scanner (System.in);
            int index;
            choose = in.nextInt();
@@ -58,25 +55,7 @@ public class Netcracker_lab1 {
                            month, 
                            year,
                            name;
-//                   Scanner dt = new Scanner (System.in);
-//                   System.out.println("Введите дату:\t");
-//                   date = dt.nextLine();
-//                   System.out.println("Введите месяц:\t");
-//                   month = dt.nextLine();
-//                   System.out.println("Введите год:\t");
-//                   year = dt.nextLine();
-//                   person1.date_birthday = LocalDate.parse(year+"-"+month+"-"+date);
-//
-//                   System.out.println("Введите Имя:\t");
-//                   name = dt.nextLine();
-//                   person1.last_name = name;
-//
-//
-//                   person1.id = i++;
-                   /*
-                   Field.Field person1  = new Field.Field();
-                    Field.Repository list_of_person = new Field.Repository();
-                   */
+
                    person1.setDate(LocalDate.parse("2000-01-01"));
                    person1.setID(1);
                    person1.setName("qwe");
@@ -220,13 +199,14 @@ public class Netcracker_lab1 {
                            choose_param = in.nextInt();
                            switch (choose_param){
                                case (1):
-                                   list_of_person.sort(new SelectedSort(), new CompareByID());
+                                   //sortType = SELECT
+                                   list_of_person.sorteR(new CompareByID());
                                    break;
                                case (2):
-                                   list_of_person.sort(new SelectedSort(), new CompareByName());
+                                   list_of_person.sorteR(new CompareByName());
                                    break;
                                case (3):
-                                   list_of_person.sort(new SelectedSort(), new CompareByDate());
+                                   list_of_person.sorteR(new CompareByDate());
                                    break;
                                case (4):
                                    break;
@@ -240,6 +220,7 @@ public class Netcracker_lab1 {
                            /**
                             * Быстрая.
                             * Case для выбора, по какому параметру сортировать
+                            * sortType = QUICK
                             */
                            choose_param = 0;
                            System.out.print("\nВыбирете сортровку:\n"
@@ -250,13 +231,13 @@ public class Netcracker_lab1 {
                            choose_param = in.nextInt();
                            switch (choose_param){
                                case (1):
-                                   list_of_person.sort(new QuickSort(), new CompareByID());
+                                   list_of_person.sorteR(new CompareByID());
                                    break;
                                case (2):
-                                   list_of_person.sort(new QuickSort(), new CompareByName());
+                                   list_of_person.sorteR(new CompareByName());
                                    break;
                                case (3):
-                                   list_of_person.sort(new QuickSort(), new CompareByDate());
+                                   list_of_person.sorteR(new CompareByDate());
                                    break;
                                case (4):
                                    break;
@@ -280,7 +261,11 @@ public class Netcracker_lab1 {
                    break;
             }
         }while (choose != 6);
-       
+
+
+
+        LOGGER.debug("Logger Debug");
+        LOGGER.info("Logger Info");
     }
 
     

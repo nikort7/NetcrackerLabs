@@ -15,6 +15,14 @@ public class Person {
     private String lastName;
     private int id;
 
+    public Person(){
+    }
+    public Person(LocalDate dateBirthday, String lastName, int id){
+        this.dateBirthday = dateBirthday;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
     public void setID(int id){
         this.id = id;
     }
@@ -35,12 +43,6 @@ public class Person {
         return dateBirthday;
     }
 
-    public Person(){
-        this.dateBirthday = dateBirthday;
-        this.lastName = lastName;
-        this.id = id;
-    }
-    
     int CurrentAge(LocalDate dateBirthday){
         return LocalDate.now().getYear() - dateBirthday.getYear();
     }
