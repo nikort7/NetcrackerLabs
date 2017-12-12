@@ -38,13 +38,13 @@ public class PersonRepository {
      */
     public void insert (Person persone){
 
-            LOGGER.debug("Вызвано добавление.");
+            LOGGER.debug("Insert is started.");
             Person[] temp_list = new Person[this.listOfPerson.length+1];
             for (int i = 0; i < listOfPerson.length; i++)
                 temp_list[i] = listOfPerson[i];
             temp_list[listOfPerson.length] = persone;
             listOfPerson = temp_list;
-            LOGGER.info("Добавление завершено.");
+            LOGGER.info("Insert is finished.");
    
     }
 
@@ -55,7 +55,7 @@ public class PersonRepository {
      */
     public void delete (int index_of_del){
 
-        LOGGER.debug("Вызвано удаление.");
+        LOGGER.debug("Delete is started.");
         Person[] temp_list_for_delete = new Person[this.listOfPerson.length - 1];
         
         for (int i = 0; i < index_of_del-1; i++)
@@ -65,7 +65,7 @@ public class PersonRepository {
             temp_list_for_delete[i] = listOfPerson[i+1];
         
         listOfPerson = temp_list_for_delete;
-        LOGGER.info("Удаление завершено.");
+        LOGGER.info("Delete is finished");
         
     }
 
@@ -88,19 +88,24 @@ public class PersonRepository {
     public Person search(PersonChecker checker, Object value) {
         for (Person p : listOfPerson) {
             if (checker.check(p, value)) {
+                LOGGER.info("Search is finished.");
                 return p;
             }
         }
+        LOGGER.info("Person not found.");
         return null;
     }
 
     public Person searchByName(String name) {
+        LOGGER.info("Search by name is started.");
         return search(new NamePersonChecker(), name);
     }
     public Person searchByID(String id) {
+        LOGGER.info("Search by ID is started.");
         return search(new IdPersonCheker(), id);
     }
     public Person searchByDate(String date) {
+        LOGGER.info("Search by Date is started.");
         return search(new DatePersonChecker(), LocalDate.parse(date));
     }
 
@@ -124,7 +129,9 @@ public class PersonRepository {
      * @param comporator
      */
     public void sorteR(PersonComporator comporator){
+        LOGGER.info("Sorting is started.");
         listOfPerson = sorter.sort(listOfPerson, comporator);
+        LOGGER.info("Sorting is finished.");
     }
 
     public void setSorter(Sorter srt){
