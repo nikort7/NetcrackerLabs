@@ -7,9 +7,10 @@ package Field;/*
 import java.util.Scanner;
 
 
-import Compare.CompareByDate;
-import Compare.CompareByID;
-import Compare.CompareByName;
+import Compare.Person.CompareByDateP;
+import Compare.Person.CompareByIDP;
+import Compare.Person.CompareByNameP;
+import Repository.PersonRepository;
 import org.joda.time.LocalDate;
 import org.apache.log4j.Logger;
 
@@ -27,12 +28,12 @@ public class Netcracker_lab1 {
 
 
     static int i = 0;
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
         LOGGER.debug("Programm is started");
         Person person2  = new Person();
         Person person3  = new Person();
-        PersonRepository list_of_person = new PersonRepository();
+        PersonRepository listOfPerson = new PersonRepository();
         int choose;
         do
         {
@@ -65,13 +66,13 @@ public class Netcracker_lab1 {
                     person2.setID(2);
                     person2.setName("aaa");
 
-                    list_of_person.insert(person1);
-                    list_of_person.insert(person2);
+                    listOfPerson.insert(person1);
+                    listOfPerson.insert(person2);
 
                     person3.setDate(LocalDate.parse("1999-05-02"));
                     person3.setID(3);
                     person3.setName("ccc");
-                    list_of_person.insert(person3);
+                    listOfPerson.insert(person3);
                     break;
                 case 2:
                     System.out.print("\nВыбирете параметр поиска:\n"
@@ -82,41 +83,41 @@ public class Netcracker_lab1 {
                     int choose_find = in.nextInt();
                     Scanner dt = new Scanner (System.in);
                     String str = "";
-                    Person psearch = new Person();
+                    Object psearch = new Person();
                     switch (choose_find){
                        case (1):
                            str = "";
                            System.out.print("Введите индекс необходимого человека \n");
                            str = dt.nextLine();
-                           psearch = list_of_person.searchByID(str);
+                           psearch = listOfPerson.searchByID(str);
                            if (psearch != null)
-                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
-                           else
-                               System.out.print("Человек с таким ID не найден.");
+//                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
+//                           else
+//                               System.out.print("Человек с таким ID не найден.");
                            break;
 
                        case (2):
                            str = "";
                            System.out.print("Введите имя необходимого человека \n");
                            str = dt.nextLine();
-                           psearch = list_of_person.searchByName(str);
+                           psearch = listOfPerson.searchByName(str);
                            if (psearch != null)
-                               //System.out.print("Найденный человек: "+ list_of_person.findPerson(new FindPersonByName(), str).getName() +".\n");
-                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
-
-                           else
-                               System.out.print("Человек с таким именем не найден.");
+                               //System.out.print("Найденный человек: "+ listOfPerson.findPerson(new FindPersonByName(), str).getName() +".\n");
+//                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
+//
+//                           else
+//                               System.out.print("Человек с таким именем не найден.");
 
                            break;
                        case (3):
                            str = "";
                            System.out.print("Введите дату необходимого человека \n");
                            str = dt.nextLine();
-                           psearch = list_of_person.searchByDate(str);
-                           if (psearch != null)
-                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
-                           else
-                               System.out.print("Человек с такой датой не найден.");
+                           psearch = listOfPerson.searchByDate(str);
+//                           if (psearch != null)
+//                               System.out.print("Найденный человек: "+ psearch.getName() +".\n");
+//                           else
+//                               System.out.print("Человек с такой датой не найден.");
 
                            break;
                        case (4):
@@ -131,11 +132,11 @@ public class Netcracker_lab1 {
                 case (3):
                     System.out.print("Введите индекс человека, который надо удалить.\n");
                     index = in.nextInt();
-                    list_of_person.delete(index);
+                    listOfPerson.delete(index);
                     break;
 
                 case (4):
-                    list_of_person.show();
+                    //listOfPerson.show();
                     Scanner show = new Scanner (System.in);
                     System.out.println("Введите любое число, чтобы продолжить:\t");
                     int w = show.nextInt();
@@ -151,14 +152,14 @@ public class Netcracker_lab1 {
                     choose_param = in.nextInt();
                     switch (choose_param){
                        case (1):
-                           //list_of_person.sort(new BubbleSort(), new CompareByID());
-                           list_of_person.sorteR(new CompareByID());
+                           //listOfPerson.sort(new BubbleSort(), new CompareByIDP());
+                           listOfPerson.sorteR(new CompareByIDP());
                            break;
                        case (2):
-                           list_of_person.sorteR(new CompareByName());
+                           listOfPerson.sorteR(new CompareByNameP());
                            break;
                        case (3):
-                           list_of_person.sorteR(new CompareByDate());
+                           listOfPerson.sorteR(new CompareByDateP());
                            break;
                        case (4):
                            break;

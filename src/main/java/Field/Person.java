@@ -25,6 +25,7 @@ public class Person {
 
     /**
      * Setting ID of Person
+     * @param id
      */
     public void setID(int id){
         this.id = id;
@@ -32,6 +33,7 @@ public class Person {
 
     /**
      * Setting name of Person
+     * @param lastName
      */
     public void setName(String lastName){
         this.lastName = lastName;
@@ -39,6 +41,7 @@ public class Person {
 
     /**
      * Setting date of Person
+     * @param dateBirthday
      */
     public void setDate(LocalDate dateBirthday){
         this.dateBirthday = dateBirthday;
@@ -46,6 +49,7 @@ public class Person {
 
     /**
      * Getting ID of Person
+     * @return
      */
     public int getID(){
         return id;
@@ -53,6 +57,7 @@ public class Person {
 
     /**
      * Getting name of Person
+     * @return
      */
     public String getName(){
         return lastName;
@@ -60,11 +65,17 @@ public class Person {
 
     /**
      * Getting date of Person
+     * @return
      */
     public LocalDate getDate(){
         return dateBirthday;
     }
 
+    /**
+     * Show Current Age
+     * @param dateBirthday
+     * @return
+     */
     int CurrentAge(LocalDate dateBirthday){
         return LocalDate.now().getYear() - dateBirthday.getYear();
     }
